@@ -1,7 +1,16 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../store/auth-context";
 
 const Header = () => {
+  const authContext = useContext(AuthContext);
+  const isLoggedIn = authContext.isLoggedIn;
+
+  const logoutHandler = () => {
+    authContext.logout();
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <Container>
@@ -29,9 +38,21 @@ const Header = () => {
             <Nav.Link as={Link} to="/blog">
               Blog
             </Nav.Link>
-            <Nav.Link as={Link} to="/login">
-              Login
-            </Nav.Link>
+            {!isLoggedIn && (
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+            )}
+            {isLoggedIn && (
+              <Nav.Link as={Link} to="/profile">
+                Profile
+              </Nav.Link>
+            )}
+            {isLoggedIn && (
+              <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>
+                Logout
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
