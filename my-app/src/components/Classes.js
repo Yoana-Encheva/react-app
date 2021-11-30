@@ -2,33 +2,28 @@ import { useState, useEffect } from "react";
 import ClassesList from "./classes/ClassesList";
 import { Col, Container, Nav, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import * as classesService from "../services/classes";
 
 function Classes() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedClasses, setLoadedClasses] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://react-fitness-app-ae9d8-default-rtdb.firebaseio.com/classes.json"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const classes = [];
+    classesService.getAll().then((data) => {
+      const classes = [];
 
-        for (const key in data) {
-          const classItem = {
-            id: key,
-            ...data[key],
-          };
+      for (const key in data) {
+        const classItem = {
+          id: key,
+          ...data[key],
+        };
 
-          classes.push(classItem);
-        }
+        classes.push(classItem);
+      }
 
-        setIsLoading(false);
-        setLoadedClasses(classes);
-      });
+      setIsLoading(false);
+      setLoadedClasses(classes);
+    });
   }, []);
 
   if (isLoading) {

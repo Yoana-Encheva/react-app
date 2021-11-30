@@ -14,6 +14,8 @@ import Login from "./components/Login";
 import UserProfile from "./components/Profile/UserProfile";
 import NewClassPage from "./pages/NewClass";
 import NotFoundPage from "./pages/NotFound";
+import ClassDetails from "./components/classes/ClassDetails";
+import ClassEdit from "./components/classes/ClassEdit";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -43,6 +45,9 @@ function App() {
           path="/profile"
           element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
         />
+        <Route path="/:id/details" element={<ClassDetails />} />
+        <Route path="/:id/edit" element={<ClassEdit />} />
+        <Route path="/:id/delete" element={<Classes />} />
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>

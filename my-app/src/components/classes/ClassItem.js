@@ -1,5 +1,6 @@
 import Card from "../ui/Card";
 import classes from "./ClassItem.module.css";
+import { Link } from "react-router-dom";
 
 function ClassItem(props) {
   return (
@@ -14,7 +15,9 @@ function ClassItem(props) {
           <p>{props.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>To Favorites</button>
+          <Link to={`/${props.id}/details`}>
+            <button>Details</button>
+          </Link>
         </div>
       </Card>
     </li>
