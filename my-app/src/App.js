@@ -16,6 +16,7 @@ import NewClassPage from "./pages/NewClass";
 import NotFoundPage from "./pages/NotFound";
 import ClassDetails from "./components/classes/ClassDetails";
 import ClassEdit from "./components/classes/ClassEdit";
+import Footer from "./components/Footer";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -24,33 +25,35 @@ function App() {
   return (
     <div className="App">
       <Header />
-
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/classes" element={<Classes />} />
-        <Route
-          path="/new-class"
-          element={isLoggedIn ? <NewClassPage /> : <Navigate to="/" />}
-        />
-        <Route path="/coaches" element={<Coaches />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route
-          path="/login"
-          element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
-        />
-        <Route path="/logout" element={<Navigate to="/" />} />
-        <Route
-          path="/profile"
-          element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
-        />
-        <Route path="/:id/details" element={<ClassDetails />} />
-        <Route path="/:id/edit" element={<ClassEdit />} />
-        <Route path="/:id/delete" element={<Classes />} />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate to="/404" />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/classes" element={<Classes />} />
+          <Route
+            path="/new-class"
+            element={isLoggedIn ? <NewClassPage /> : <Navigate to="/" />}
+          />
+          <Route path="/coaches" element={<Coaches />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route
+            path="/login"
+            element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
+          />
+          <Route path="/logout" element={<Navigate to="/" />} />
+          <Route
+            path="/profile"
+            element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
+          />
+          <Route path="/:id/details" element={<ClassDetails />} />
+          <Route path="/:id/edit" element={<ClassEdit />} />
+          <Route path="/:id/delete" element={<Classes />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/404" />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }

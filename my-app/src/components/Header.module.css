@@ -1,0 +1,22 @@
+.header-container {
+    min-height: 100px;
+    z-index: 999999;
+}
+
+.image-logo {
+    height: 100px;
+}
+
+@media (max-width: 1000px) {
+    .image-logo {
+        height: 70px;
+    }
+}
+
+.right-nav-links a {
+    color: #FFF !important;
+}
+
+.right-nav-links a:hover {
+    color: #000 !important;
+}

@@ -1,0 +1,67 @@
+
+.distributed {
+    background-color: #ffc800;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    font: bold 16px sans-serif;
+    text-align: left;
+    padding: 20px 30px 25px;
+    overflow: hidden;
+}
+
+.image-logo {
+    height: 175px;
+}
+
+.links {
+    color: #0D0F45 !important;
+}
+
+@media (max-width: 768px) {
+    .links {
+        padding: 10px 15px 10px 0!important;
+    }
+}
+
+.link-contact {
+    color: #0D0F45 !important;
+    padding: 10px 0 !important;
+}
+
+
+.company-name {
+    color: #8f9296;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.icons {
+    margin-top: 40px;
+}
+
+
+@media (min-width: 768px) {
+    .bottom {
+        margin-left: 15px;
+    }
+}
+
+.icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-color: #0D0F45;
+    border-radius: 2px;
+
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
