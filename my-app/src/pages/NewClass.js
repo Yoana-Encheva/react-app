@@ -1,21 +1,13 @@
 import NewClassForm from "../components/classes/NewClassForm";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import * as classesService from "../services/classes";
 
 function NewClassPage() {
   const navigate = useNavigate();
 
   function addClassHandler(classData) {
-    fetch(
-      "https://react-fitness-app-ae9d8-default-rtdb.firebaseio.com/classes.json",
-      {
-        method: "POST",
-        body: JSON.stringify(classData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(() => {
+    classesService.create(classData).then(() => {
       navigate("/classes");
     });
   }

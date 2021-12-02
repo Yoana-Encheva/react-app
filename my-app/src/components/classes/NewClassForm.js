@@ -1,4 +1,3 @@
-import Card from "../ui/Card";
 import classes from "./NewClassForm.module.css";
 import { useRef } from "react";
 
@@ -20,36 +19,32 @@ function NewClassForm(props) {
       description: enteredDescription,
     };
 
-    console.log(newClassData);
-
     props.onAddClass(newClassData);
   }
 
   return (
-    <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="title">Class Title</label>
-          <input type="text" required id="title" ref={titleInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="image">Class Image</label>
-          <input type="url" required id="image" ref={imageInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            required
-            rows="5"
-            ref={descriptionInputRef}
-          ></textarea>
-        </div>
-        <div className={classes.actions}>
-          <button>Add Class</button>
-        </div>
-      </form>
-    </Card>
+    <form className={classes.form} onSubmit={submitHandler}>
+      <div className={classes.control}>
+        <label htmlFor="title">Class Title</label>
+        <input type="text" required id="title" ref={titleInputRef} />
+      </div>
+      <div className={classes.control}>
+        <label htmlFor="image">Class Image</label>
+        <input type="url" required id="image" ref={imageInputRef} />
+      </div>
+      <div className={classes.control}>
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          required
+          rows="5"
+          ref={descriptionInputRef}
+        ></textarea>
+      </div>
+      <div className={classes.actions}>
+        <button>Add Class</button>
+      </div>
+    </form>
   );
 }
 

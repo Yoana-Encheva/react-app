@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import ClassesList from "./classes/ClassesList";
-import { Col, Container, Nav, Row, Spinner } from "react-bootstrap";
+import { Container, Nav, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as classesService from "../services/classes";
+import AuthContext from "../store/auth-context";
+import classes from "./Home.module.css";
 
 function Classes() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedClasses, setLoadedClasses] = useState([]);
+  const authContext = useContext(AuthContext);
+  const isAdmin = authContext.role === "admin";
 
   useEffect(() => {
     classesService.getAll().then((data) => {
@@ -35,28 +39,29 @@ function Classes() {
   }
 
   return (
-    <Container className="mt-5 text-center">
-      <Nav variant="pills" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link as={Link} to="/new-class">
-            Add New Class
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as={Link} to="/" eventKey="link-1">
-            Favorite Classes
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Row className="justify-content-md-center">
-        <Col lg={4} md={6} sm={12} className="">
-          <section>
-            <h1>All Classes</h1>
-            <ClassesList classes={loadedClasses} />
-          </section>
-        </Col>
-      </Row>
-    </Container>
+    <div className={classes["class-section"]}>
+      <Container className={classes["class-section"] + "mt-4"}>
+        {isAdmin && (
+          <Nav variant="pills" defaultActiveKey="/home">
+            <Nav.Item>
+              <Nav.Link as={Link} to="/new-class">
+                Add New Class
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        )}
+        <Row className="justify-content-md-center mt-2 g-4">
+          {loadedClasses.length ? (
+            <section>
+              <h1>All Classes</h1>
+              <ClassesList classes={loadedClasses} />
+            </section>
+          ) : (
+            <h1>There are no classes at the moment</h1>
+          )}
+        </Row>
+      </Container>
+    </div>
   );
 }
 

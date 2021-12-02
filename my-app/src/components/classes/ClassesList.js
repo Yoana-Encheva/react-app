@@ -1,20 +1,19 @@
 import ClassItem from "./ClassItem";
-import classes from "./ClassesList.module.css";
+import { Col } from "react-bootstrap";
 
 function ClassesList(props) {
   return (
-    <ul className={classes.list}>
+    <Col md="4">
       {props.classes.map((classItem) => (
         <ClassItem
           key={classItem.id}
           id={classItem.id}
           image={classItem.image}
           title={classItem.title}
-          address={classItem.address}
           description={classItem.description}
         />
       ))}
-    </ul>
+    </Col>
   );
 }
 

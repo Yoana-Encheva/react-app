@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import * as classesService from "../../services/classes";
+import AuthContext from "../../store/auth-context";
 import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -8,6 +9,8 @@ const ClassDetails = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedClass, setSelectedClass] = useState({});
+  const authContext = useContext(AuthContext);
+  const isAdmin = authContext.role === "admin";
 
   useEffect(() => {
     classesService.getById(id).then((data) => {
@@ -16,9 +19,12 @@ const ClassDetails = () => {
     });
   }, [id]);
 
-  const deleteHandler = () => {
-    classesService.deleteClass(id);
-    navigate("/classes");
+  const deleteHandler = (e) => {
+    e.preventDefault();
+
+    classesService.deleteClass(id).then(() => {
+      navigate("/classes");
+    });
   };
 
   if (isLoading) {
@@ -39,14 +45,18 @@ const ClassDetails = () => {
               <Card.Img variant="top" src={selectedClass.image} />
               <Card.Body>
                 <Card.Text>{selectedClass.description}</Card.Text>
-                <Link to={`/${id}/edit`}>
-                  <Button variant="warning">Edit</Button>
-                </Link>
-                <Link to={`/${id}/delete`}>
-                  <Button variant="warning" onClick={deleteHandler}>
-                    Delete
-                  </Button>
-                </Link>
+                {isAdmin && (
+                  <div>
+                    <Link to={`/${id}/edit`}>
+                      <Button variant="warning">Edit</Button>
+                    </Link>
+                    <Link to={`/${id}/delete`}>
+                      <Button variant="warning" onClick={deleteHandler}>
+                        Delete
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </Col>
