@@ -75,7 +75,7 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     userId: userId,
-    role: userId === "vRUQVY6wN4bIA5102N9c7ZoDZ0D2" ? "admin" : "user",
+    role: userId === "K3rVxz8sZVW3uTL3MX6ROcHkGGm1" ? "admin" : "user",
   };
 
   return (

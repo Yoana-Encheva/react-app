@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import ClassesList from "./classes/ClassesList";
-import { Container, Nav, Row, Spinner } from "react-bootstrap";
+import ClassesList from "../components/classes/ClassesList";
+import { Button, Container, Nav, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as classesService from "../services/classes";
 import AuthContext from "../store/auth-context";
@@ -45,7 +45,7 @@ function Classes() {
           <Nav variant="pills" defaultActiveKey="/home">
             <Nav.Item>
               <Nav.Link as={Link} to="/new-class">
-                Add New Class
+                <Button variant="outline-dark">Add New Class</Button>
               </Nav.Link>
             </Nav.Item>
           </Nav>
