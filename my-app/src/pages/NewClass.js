@@ -1,5 +1,5 @@
-import NewClassForm from "../components/classes/NewClassForm";
-import { Container, Row, Col } from "react-bootstrap";
+import ClassForm from "../components/classes/ClassForm";
+import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as classesService from "../services/classes";
 
@@ -18,7 +18,7 @@ function NewClassPage() {
         <Col lg={4} md={6} sm={12} className="">
           <section>
             <h1>Add New Class</h1>
-            <NewClassForm onAddClass={addClassHandler} />
+            <ClassForm onUpdateClass={addClassHandler} buttonLabel="Create" />
           </section>
         </Col>
       </Row>

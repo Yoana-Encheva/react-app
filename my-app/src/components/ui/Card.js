@@ -2,12 +2,14 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function CardComponent(props) {
+  const defaultUrl =
+    "https://cdn.pixabay.com/photo/2017/07/02/19/24/dumbbells-2465478__340.jpg";
   return (
     <Card bg={"primary"} key={"primary"} text={"white"} className="mb-2">
       <Card.Img
         className="mb-2"
         variant="top"
-        src={props.image}
+        src={props.image || defaultUrl}
         alt="Card image"
       />
       <Card.Body>

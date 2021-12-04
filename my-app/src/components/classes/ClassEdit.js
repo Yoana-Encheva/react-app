@@ -1,32 +1,53 @@
-// import { useState, useEffect } from "react";
-// import * as classesService from "../../services/classes";
-// import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
-import { Container } from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import * as classesService from "../../services/classes";
+import { Container, Col, Row, Spinner } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import ClassForm from "../../components/classes/ClassForm";
 
 const ClassEdit = () => {
-  //   const { id } = useParams();
-  //   const [isLoading, setIsLoading] = useState(true);
-  //   const [selectedClass, setSelectedClass] = useState({});
+  const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     classesService.getById(id).then((data) => {
-  //       setIsLoading(false);
-  //       setSelectedClass(data);
-  //     });
-  //   }, [id]);
+  const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedClass, setSelectedClass] = useState({});
 
-  //   if (isLoading) {
-  //     return (
-  //       <Spinner animation="border" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </Spinner>
-  //     );
-  //   }
+  useEffect(() => {
+    classesService.getById(id).then((data) => {
+      setIsLoading(false);
+      setSelectedClass(data);
+    });
+  }, [id]);
+
+  function editClassHandler(classData) {
+    classesService.edit(classData, id).then(() => {
+      navigate("/classes");
+    });
+  }
+
+  if (isLoading) {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
 
   return (
     <Container className="mt-5 text-center">
-      <h1>edit</h1>
+      <Row className="justify-content-md-center">
+        <Col lg={4} md={6} sm={12} className="">
+          <section>
+            <h1>Edit Class</h1>
+            <ClassForm
+              onUpdateClass={editClassHandler}
+              title={selectedClass?.title}
+              image={selectedClass?.image}
+              description={selectedClass?.description}
+              buttonLabel="Edit"
+            />
+          </section>
+        </Col>
+      </Row>
     </Container>
   );
 };

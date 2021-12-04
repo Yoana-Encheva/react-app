@@ -40,11 +40,13 @@ export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(initialToken);
   const [userId, setUserId] = useState("");
   const userIsLoggedIn = !!token;
+  const [role, setRole] = useState(localStorage.getItem("role"));
 
   const logoutHandler = useCallback(() => {
     setToken(null);
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTokenTime");
+    localStorage.removeItem("role");
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);
@@ -52,9 +54,13 @@ export const AuthContextProvider = (props) => {
   }, []);
 
   const loginHandler = (token, expirationTime, localId) => {
+    const userRole =
+      localId === "K3rVxz8sZVW3uTL3MX6ROcHkGGm1" ? "admin" : "user";
+    setRole(userRole);
     setToken(token);
     setUserId(localId);
 
+    localStorage.setItem("role", userRole);
     localStorage.setItem("token", token);
     localStorage.setItem("expirationTokenTime", expirationTime);
 
@@ -75,7 +81,7 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     userId: userId,
-    role: userId === "K3rVxz8sZVW3uTL3MX6ROcHkGGm1" ? "admin" : "user",
+    role: role,
   };
 
   return (
