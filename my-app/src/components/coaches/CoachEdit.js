@@ -2,26 +2,26 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Col, Row, Spinner } from "react-bootstrap";
 
-import * as classesService from "../../services/classes";
+import * as coachesService from "../../services/coaches";
 import GlobalForm from "../ui/GlobalForm";
 
-const ClassEdit = () => {
+const CoachEdit = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedClass, setSelectedClass] = useState({});
+  const [coach, setCoach] = useState({});
 
   useEffect(() => {
-    classesService.getById(id).then((data) => {
+    coachesService.getById(id).then((data) => {
       setIsLoading(false);
-      setSelectedClass(data);
+      setCoach(data);
     });
   }, [id]);
 
-  function editClassHandler(classData) {
-    classesService.edit(classData, id).then(() => {
-      navigate("/classes");
+  function editCoachHandler(coachData) {
+    coachesService.edit(coachData, id).then(() => {
+      navigate("/coaches");
     });
   }
 
@@ -38,13 +38,13 @@ const ClassEdit = () => {
       <Row className="justify-content-md-center">
         <Col lg={4} md={6} sm={12} className="">
           <section>
-            <h1>Edit Class</h1>
+            <h1>Edit Coach</h1>
             <GlobalForm
-              onSubmit={editClassHandler}
-              title={selectedClass?.title}
-              image={selectedClass?.image}
-              description={selectedClass?.description}
-              buttonLabel="Edit Class"
+              onSubmit={editCoachHandler}
+              title={coach?.title}
+              image={coach?.image}
+              description={coach?.description}
+              buttonLabel="Edit Coach"
             />
           </section>
         </Col>
@@ -52,4 +52,4 @@ const ClassEdit = () => {
     </Container>
   );
 };
-export default ClassEdit;
+export default CoachEdit;

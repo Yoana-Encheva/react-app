@@ -1,14 +1,14 @@
 import GlobalForm from "../components/ui/GlobalForm";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import * as classesService from "../services/classes";
+import * as coachesService from "../services/coaches";
 
-function NewClassPage() {
+function NewCoachPage() {
   const navigate = useNavigate();
 
-  function addClassHandler(classData) {
-    classesService.create(classData).then(() => {
-      navigate("/classes");
+  function addCoachHandler(coachData) {
+    coachesService.create(coachData).then(() => {
+      navigate("/coaches");
     });
   }
 
@@ -17,8 +17,8 @@ function NewClassPage() {
       <Row className="justify-content-md-center">
         <Col lg={4} md={6} sm={12} className="">
           <section>
-            <h1>Add New Class</h1>
-            <GlobalForm onSubmit={addClassHandler} buttonLabel="Create Class" />
+            <h1>Add New Coach</h1>
+            <GlobalForm onSubmit={addCoachHandler} buttonLabel="Create Coach" />
           </section>
         </Col>
       </Row>
@@ -26,4 +26,4 @@ function NewClassPage() {
   );
 }
 
-export default NewClassPage;
+export default NewCoachPage;

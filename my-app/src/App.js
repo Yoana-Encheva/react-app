@@ -3,20 +3,25 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import AuthContext from "./store/auth-context";
 
 import "./App.css";
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Classes from "./pages/Classes";
-import Coaches from "./pages/Coaches";
-import Contacts from "./pages/Contacts";
-import Blog from "./pages/Blog";
-import Login from "./pages/Login";
-import UserProfile from "./components/Profile/UserProfile";
-import NewClassPage from "./pages/NewClass";
-import NotFoundPage from "./pages/NotFound";
+
 import ClassDetails from "./components/classes/ClassDetails";
 import ClassEdit from "./components/classes/ClassEdit";
+import CoachDetails from "./components/coaches/CoachDetails";
+import CoachEdit from "./components/coaches/CoachEdit";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import UserProfile from "./components/Profile/UserProfile";
+
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import Coaches from "./pages/Coaches";
+import Contacts from "./pages/Contacts";
+import Classes from "./pages/Classes";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NewCoachPage from "./pages/NewCoach";
+import NewClassPage from "./pages/NewClass";
+import NotFoundPage from "./pages/NotFound";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -34,7 +39,19 @@ function App() {
             path="/new-class"
             element={isLoggedIn ? <NewClassPage /> : <Navigate to="/" />}
           />
+          <Route path="/:id/details" element={<ClassDetails />} />
+          <Route path="/:id/edit" element={<ClassEdit />} />
+          <Route path="/:id/delete" element={<Classes />} />
+
           <Route path="/coaches" element={<Coaches />} />
+          <Route
+            path="/new-coach"
+            element={isLoggedIn ? <NewCoachPage /> : <Navigate to="/" />}
+          />
+          <Route path="/coaches/:id/details" element={<CoachDetails />} />
+          <Route path="/coaches/:id/edit" element={<CoachEdit />} />
+          <Route path="/coaches/:id/delete" element={<Coaches />} />
+
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/blog" element={<Blog />} />
           <Route
@@ -46,9 +63,6 @@ function App() {
             path="/profile"
             element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
           />
-          <Route path="/:id/details" element={<ClassDetails />} />
-          <Route path="/:id/edit" element={<ClassEdit />} />
-          <Route path="/:id/delete" element={<Classes />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>

@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 
-function ClassForm(props) {
+function GlobalForm(props) {
   function submitHandler(event) {
     event.preventDefault();
 
@@ -10,20 +10,20 @@ function ClassForm(props) {
     const enteredImageUrl = formData.get("url");
     const enteredDescription = formData.get("description");
 
-    const newClassData = {
+    const newFormData = {
       title: enteredTitle,
       image: enteredImageUrl,
       description: enteredDescription,
     };
 
-    props.onUpdateClass(newClassData);
+    props.onSubmit(newFormData);
   }
 
   return (
     <>
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3">
-          <Form.Label>Class Title</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
             required
@@ -33,7 +33,7 @@ function ClassForm(props) {
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Class Image</Form.Label>
+          <Form.Label>Image Url</Form.Label>
           <Form.Control
             type="url"
             required
@@ -55,11 +55,11 @@ function ClassForm(props) {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          {props.buttonLabel} Class
+          {props.buttonLabel}
         </Button>
       </Form>
     </>
   );
 }
 
-export default ClassForm;
+export default GlobalForm;
