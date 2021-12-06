@@ -4,6 +4,8 @@ import AuthContext from "./store/auth-context";
 
 import "./App.css";
 
+import ArticleDetails from "./components/articles/ArticleDetails";
+import ArticleEdit from "./components/articles/ArticleEdit";
 import ClassDetails from "./components/classes/ClassDetails";
 import ClassEdit from "./components/classes/ClassEdit";
 import CoachDetails from "./components/coaches/CoachDetails";
@@ -19,6 +21,7 @@ import Contacts from "./pages/Contacts";
 import Classes from "./pages/Classes";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import NewArticlePage from "./pages/NewArticle";
 import NewCoachPage from "./pages/NewCoach";
 import NewClassPage from "./pages/NewClass";
 import NotFoundPage from "./pages/NotFound";
@@ -53,7 +56,16 @@ function App() {
           <Route path="/coaches/:id/delete" element={<Coaches />} />
 
           <Route path="/contacts" element={<Contacts />} />
+
           <Route path="/blog" element={<Blog />} />
+          <Route
+            path="/new-article"
+            element={isLoggedIn ? <NewArticlePage /> : <Navigate to="/" />}
+          />
+          <Route path="/articles/:id/details" element={<ArticleDetails />} />
+          <Route path="/articles/:id/edit" element={<ArticleEdit />} />
+          <Route path="/articles/:id/delete" element={<Blog />} />
+
           <Route
             path="/login"
             element={!isLoggedIn ? <Login /> : <Navigate to="/" />}

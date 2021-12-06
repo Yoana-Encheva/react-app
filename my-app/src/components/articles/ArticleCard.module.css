@@ -1,0 +1,33 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.image-wrapper {
+  flex: 1;
+  border-radius: 5px;
+  height: 350px;
+  max-width: 450px;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card {
+  flex: 1;
+  max-width: 550px;
+  margin-left: -60px;
+  height: 300px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
