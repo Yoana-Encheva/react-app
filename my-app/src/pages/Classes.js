@@ -50,14 +50,14 @@ function Classes() {
             </Nav.Item>
           </Nav>
         )}
-        <Row className="justify-content-md-center mt-2 g-4">
+        <Row className="justify-content-md-center mt-2 g-4 align-content-center">
           {loadedClasses.length ? (
             <section>
-              <h1>All Classes</h1>
+              <h1 className="mt-5 mb-5">All Classes</h1>
               <ClassesList classes={loadedClasses} />
             </section>
           ) : (
-            <h1>There are no classes at the moment</h1>
+            <h2>There are no classes at the moment</h2>
           )}
         </Row>
       </Container>

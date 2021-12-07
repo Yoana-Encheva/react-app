@@ -7,7 +7,13 @@ function CoachCard(props) {
     "https://cdn.pixabay.com/photo/2015/05/26/09/23/board-784363__340.jpg";
 
   return (
-    <Card bg={"primary"} key={"primary"} text={"white"} className="mb-2">
+    <Card
+      style={{ flex: "1" }}
+      bg={"primary"}
+      key={"primary"}
+      text={"white"}
+      className="mb-2"
+    >
       <div className={classes["image-wrapper"]}>
         <img
           className={classes["card-img"]}

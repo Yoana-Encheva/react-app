@@ -56,7 +56,8 @@ h4 {
   color: #0d0f45;
 }
 
-.class-section {
+.class-section,
+.about-us-section {
   height: auto;
   vertical-align: middle;
   background-image: url(../assets/img/bg-section-yellow-4.png);
@@ -66,6 +67,11 @@ h4 {
   background-color: transparent;
   background-size: cover;
   margin-bottom: 40px;
+}
+
+.about-us-section {
+  background-image: url(../assets/img/bg-section-yellow-4-right.png);
+  background-position: 30% 5%;
 }
 
 .about-us-section {

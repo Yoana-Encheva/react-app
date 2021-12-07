@@ -40,7 +40,7 @@ function Coaches() {
 
   return (
     <div className={classes["class-section"]}>
-      <Container className={classes["class-section"] + "mt-4"}>
+      <Container className={classes["class-section"] + "mt-5 mb-5"}>
         {isAdmin && (
           <Nav variant="pills" defaultActiveKey="/home">
             <Nav.Item>
@@ -50,10 +50,10 @@ function Coaches() {
             </Nav.Item>
           </Nav>
         )}
-        <Row className="justify-content-md-center mt-2 g-4">
+        <Row className="justify-content-md-center">
           {coaches.length ? (
             <section>
-              <h1>Our Coaches</h1>
+              <h1 className="mt-5 mb-5">Our Coaches</h1>
               <CoachList coaches={coaches} />
             </section>
           ) : (

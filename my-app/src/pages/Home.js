@@ -1,6 +1,14 @@
-import { Container, Col, Ratio, Row, Card } from "react-bootstrap";
+import {
+  Container,
+  Col,
+  Ratio,
+  Row,
+  Card,
+  Image,
+  Carousel,
+} from "react-bootstrap";
 import classes from "./Home.module.css";
-import aboutUsImage from "../assets/img/about-us-2.png";
+import aboutUsImage from "../assets/img/about-us-4.jpg";
 import sample from "../assets/video/sample-1.mp4";
 
 const Home = () => {
@@ -109,19 +117,7 @@ const Home = () => {
 
           <Row className="justify-content-md-center mt-2 g-4">
             <Col md="5">
-              <Card
-                bg={"primary"}
-                key={"primary"}
-                text={"white"}
-                className="mb-2"
-              >
-                <Card.Img
-                  className="mb-5"
-                  variant="top"
-                  src={aboutUsImage}
-                  alt="Card image"
-                />
-              </Card>
+              <Image fluid src={aboutUsImage}></Image>
             </Col>
 
             <Col md="5">
@@ -130,6 +126,7 @@ const Home = () => {
                 key={"primary"}
                 text={"white"}
                 className="mb-2"
+                border="light"
               >
                 <Card.Body>
                   <Card.Title> CLASSES</Card.Title>
@@ -147,6 +144,347 @@ const Home = () => {
             </Col>
             <Col md="4"></Col>
           </Row>
+        </Container>
+      </div>
+
+      <div className="customer-reviews mt-5 mb-5">
+        <Container>
+          <h3 className="mb-4"> Customer reviews</h3>
+          <Carousel>
+            <Carousel.Item>
+              <Row>
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Carousel.Item>
+            <Carousel.Item>
+              <Row>
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Carousel.Item>
+            <Carousel.Item>
+              <Row>
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col>
+                  <Card
+                    bg={"blue"}
+                    key={"primary"}
+                    text={"white"}
+                    className="mb-2"
+                    border="light"
+                  >
+                    <Card.Body>
+                      <Card.Title className="justify-content-center">
+                        <Image
+                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          roundedCircle
+                          fluid
+                          style={{
+                            height: "200px",
+                            width: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p> John Doe </p>
+                      </Card.Title>
+                      <Card.Text>
+                        <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Accusantium blanditiis officiis quisquam
+                          recusandae reprehenderit. Accusantium deleniti eos est
+                          facere reprehenderit sapiente sint voluptatem.
+                          Asperiores autem beatae laboriosam officia quae,
+                          temporibus.
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Carousel.Item>
+          </Carousel>
         </Container>
       </div>
     </div>

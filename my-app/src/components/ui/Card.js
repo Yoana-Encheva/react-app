@@ -1,5 +1,6 @@
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import classes from "./Card.module.css";
 
 function CardComponent(props) {
   const defaultUrl =
@@ -7,7 +8,7 @@ function CardComponent(props) {
   return (
     <Card bg={"primary"} key={"primary"} text={"white"} className="mb-2">
       <Card.Img
-        className="mb-2"
+        className={`mb-2 ${classes["card-image-height"]}`}
         variant="top"
         src={props.image || defaultUrl}
         alt="Card image"

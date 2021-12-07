@@ -4,3 +4,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   max-width: 400px;
 }
+
+.card-image-height {
+  min-height: 280px;
+}

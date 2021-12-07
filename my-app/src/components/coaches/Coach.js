@@ -1,9 +1,11 @@
 import CoachCard from "../ui/CoachCard";
+import classes from "./CoachList.module.css";
 
 function Coach(props) {
   return (
     <>
       <CoachCard
+        className={classes["flex-card"]}
         key={props.id}
         id={props.id}
         image={props.image}

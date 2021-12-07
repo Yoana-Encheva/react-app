@@ -1,0 +1,19 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-card {
+  flex: 0 0 33.3333333%;
+  max-width: 99%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+}
+
+.card-img-top {
+  min-height: 272px !important;
+}
