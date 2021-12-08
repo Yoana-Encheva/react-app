@@ -10,7 +10,7 @@ function Blog() {
   const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const authContext = useContext(AuthContext);
-  const isAdmin = authContext.role === "admin";
+  const isLoggedIn = authContext.isLoggedIn;
 
   useEffect(() => {
     articlesService.getAll().then((data) => {
@@ -41,7 +41,7 @@ function Blog() {
   return (
     <div className={classes["class-section"]}>
       <Container className={classes["class-section"] + "mt-4"}>
-        {isAdmin && (
+        {isLoggedIn && (
           <Nav variant="pills" defaultActiveKey="/home">
             <Nav.Item>
               <Nav.Link as={Link} to="/new-article">
