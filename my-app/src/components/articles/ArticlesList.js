@@ -9,9 +9,10 @@ function ArticlesList(props) {
           <Article
             key={article.id}
             id={article.id}
+            createdOn={article.created}
+            description={article.description}
             image={article.image}
             title={article.title}
-            description={article.description}
           />
         </Col>
       ))}
