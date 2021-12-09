@@ -11,6 +11,7 @@ const ArticleDetails = () => {
   const [selectedArticle, setSelectedArticle] = useState({});
   const authContext = useContext(AuthContext);
   const isOwner = authContext.userId === selectedArticle.createdBy;
+  const isAdmin = authContext.role === "admin";
 
   useEffect(() => {
     articlesService.getById(id).then((data) => {
@@ -45,7 +46,7 @@ const ArticleDetails = () => {
               <Card.Img variant="top" src={selectedArticle.image} />
               <Card.Body>
                 <Card.Text>{selectedArticle.description}</Card.Text>
-                {isOwner && (
+                {(isOwner || isAdmin) && (
                   <div>
                     <Link to={`/articles/${id}/edit`}>
                       <Button variant="warning">Edit</Button>
