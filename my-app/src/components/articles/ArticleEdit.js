@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Col, Row, Spinner } from "react-bootstrap";
+
+import AuthContext from "../../store/auth-context";
 
 import * as articlesService from "../../services/articles";
+
 import ArticleForm from "./ArticleForm";
+import { Container, Col, Row, Spinner } from "react-bootstrap";
 
 const ArticleEdit = () => {
   const navigate = useNavigate();
@@ -11,6 +14,10 @@ const ArticleEdit = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState({});
+  const authContext = useContext(AuthContext);
+  const isOwner = authContext.userId === article.createdBy;
+  const isAdmin = authContext.role === "admin";
+  const isAuthorised = isAdmin || isOwner;
 
   useEffect(() => {
     articlesService.getById(id).then((data) => {
@@ -37,16 +44,23 @@ const ArticleEdit = () => {
     <Container className="mt-5 text-center">
       <Row className="justify-content-md-center">
         <Col lg={4} md={6} sm={12} className="">
-          <section>
-            <h1>Edit article</h1>
-            <ArticleForm
-              onSubmit={editArticleHandler}
-              title={article?.title}
-              image={article?.image}
-              description={article?.description}
-              buttonLabel="Edit article"
-            />
-          </section>
+          {isAuthorised && (
+            <section>
+              <h1>Edit article</h1>
+              <ArticleForm
+                onSubmit={editArticleHandler}
+                title={article?.title}
+                image={article?.image}
+                description={article?.description}
+                buttonLabel="Edit article"
+              />
+            </section>
+          )}
+          {!isAuthorised && (
+            <section>
+              <h1>Not Authorised.</h1>
+            </section>
+          )}
         </Col>
       </Row>
     </Container>

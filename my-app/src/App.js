@@ -29,6 +29,7 @@ import NotFoundPage from "./pages/NotFound";
 function App() {
   const authContext = useContext(AuthContext);
   const isLoggedIn = authContext.isLoggedIn;
+  const isAdmin = authContext.role === "admin";
 
   return (
     <div className="App">
@@ -37,23 +38,36 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/about" element={<About />} />
+
           <Route path="/classes" element={<Classes />} />
           <Route
             path="/new-class"
-            element={isLoggedIn ? <NewClassPage /> : <Navigate to="/" />}
+            element={isAdmin ? <NewClassPage /> : <Navigate to="/" />}
           />
           <Route path="/:id/details" element={<ClassDetails />} />
-          <Route path="/:id/edit" element={<ClassEdit />} />
-          <Route path="/:id/delete" element={<Classes />} />
+          <Route
+            path="/:id/edit"
+            element={isAdmin ? <ClassEdit /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/:id/delete"
+            element={isAdmin ? <Classes /> : <Navigate to="/" />}
+          />
 
           <Route path="/coaches" element={<Coaches />} />
           <Route
             path="/new-coach"
-            element={isLoggedIn ? <NewCoachPage /> : <Navigate to="/" />}
+            element={isAdmin ? <NewCoachPage /> : <Navigate to="/" />}
           />
           <Route path="/coaches/:id/details" element={<CoachDetails />} />
-          <Route path="/coaches/:id/edit" element={<CoachEdit />} />
-          <Route path="/coaches/:id/delete" element={<Coaches />} />
+          <Route
+            path="/coaches/:id/edit"
+            element={isAdmin ? <CoachEdit /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/coaches/:id/delete"
+            element={isAdmin ? <Coaches /> : <Navigate to="/" />}
+          />
 
           <Route path="/contacts" element={<Contacts />} />
 
@@ -63,8 +77,14 @@ function App() {
             element={isLoggedIn ? <NewArticlePage /> : <Navigate to="/" />}
           />
           <Route path="/articles/:id/details" element={<ArticleDetails />} />
-          <Route path="/articles/:id/edit" element={<ArticleEdit />} />
-          <Route path="/articles/:id/delete" element={<Blog />} />
+          <Route
+            path="/articles/:id/edit"
+            element={isLoggedIn ? <ArticleEdit /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/articles/:id/delete"
+            element={isLoggedIn ? <Blog /> : <Navigate to="/" />}
+          />
 
           <Route
             path="/login"
