@@ -1,3 +1,12 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import AuthContext from "../store/auth-context";
+import * as userService from "../services/user";
+import { validationSchema, errorMessages } from "../helpers/helpers";
+
+import { Formik } from "formik";
+
 import {
   Button,
   Col,
@@ -7,29 +16,11 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../store/auth-context";
-import * as userService from "../services/user";
-
 import "./Login.css";
-
-import { Formik } from "formik";
-import * as EmailValidator from "email-validator";
-import * as Yup from "yup";
-
-const errorMessages = {
-  EMAIL_EXISTS: "This email already exists.",
-  INVALID_EMAIL: "This email is not valid.",
-  EMAIL_NOT_FOUND: "This email does not persist in the data base.",
-  INVALID_PASSWORD: "This password is not valid.",
-};
 
 const Login = () => {
   const navigate = useNavigate();
-
   const authContext = useContext(AuthContext);
-
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,18 +29,6 @@ const Login = () => {
     setError("");
     setShow(false);
   };
-
-  const validationSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(6, "*Passwords must have at least 6 characters")
-      .max(15, "*Passwords can't be longer than 15 characters")
-      .required("*Password is required"),
-    email: Yup.string()
-      .email("*Must be a valid email address")
-      .max(100, "*Email must be less than 100 characters")
-      .required("*Email is required")
-      .test((value) => EmailValidator.validate(value)),
-  });
 
   const switchAuthModeHandler = (event) => {
     event.preventDefault();
@@ -80,11 +59,11 @@ const Login = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = "Unsuccessful Authentication!";
-            if (data?.error?.message) {
-              errorMessage = data.error.message;
-            }
-            throw new Error(errorMessage);
+            throw new Error(
+              data?.error?.message
+                ? data.error.message
+                : "Unsuccessful Authentication!"
+            );
           });
         }
       })
@@ -136,7 +115,6 @@ const Login = () => {
                       <div className="error-message">{errors.email}</div>
                     ) : null}
                   </Form.Group>
-
                   <Form.Group className="mb-3" controlId="password">
                     <Form.Control
                       required
@@ -154,13 +132,16 @@ const Login = () => {
                       <div className="error-message">{errors.password}</div>
                     ) : null}
                   </Form.Group>
-
                   {!isLoading && (
-                    <Button variant="warning" size="lg" type="submit">
+                    <Button
+                      variant="warning"
+                      size="lg"
+                      type="submit"
+                      disabled={errors.password || errors.email}
+                    >
                       {isLogin ? "Login" : "Create Account"}
                     </Button>
                   )}
-
                   {isLoading && (
                     <Button variant="warning" disabled>
                       <Spinner
@@ -173,7 +154,6 @@ const Login = () => {
                       Loading...
                     </Button>
                   )}
-
                   <Button
                     variant="warning"
                     size="lg"

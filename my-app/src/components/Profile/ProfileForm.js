@@ -1,39 +1,64 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import AuthContext from "../../store/auth-context";
-import classes from "./ProfileForm.module.css";
 import * as userService from "../../services/user";
+import { validationSchema, errorMessages } from "../../helpers/helpers";
+
+import { Formik } from "formik";
+
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Spinner,
+} from "react-bootstrap";
+import classes from "./ProfileForm.module.css";
 
 const ProfileForm = () => {
   const navigate = useNavigate();
-
   const authContext = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setError("");
+    setShow(false);
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    let { password } = Object.fromEntries(new FormData(event.currentTarget));
+    let { email, password } = Object.fromEntries(
+      new FormData(event.currentTarget)
+    );
 
     const userPayload = {
       idToken: authContext.token,
+      email: email,
       password: password,
       returnSecureToken: true,
     };
 
-    // to add validation
+    setIsLoading(true);
 
     userService
-      .changePassword(userPayload)
+      .updateUserInfo(userPayload)
       .then((res) => {
+        setIsLoading(false);
+
         if (res.ok) {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = "Unsuccessful attempt to change password!";
-            if (data?.error?.message) {
-              errorMessage = data.error.message;
-            }
-            throw new Error(errorMessage);
+            throw new Error(
+              data?.error?.message
+                ? data.error.message
+                : "Unsuccessful Authentication!"
+            );
           });
         }
       })
@@ -41,27 +66,105 @@ const ProfileForm = () => {
         navigate("/");
       })
       .catch((err) => {
-        alert(err.message);
+        setError(err.message);
+        setShow(true);
       });
   };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
-      <div className={classes.control}>
-        <label htmlFor="password">New Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          minLength="7"
-          defaultValue="password"
-          name="password"
-        />
-      </div>
-      <div className={classes.action}>
-        <button>Change Password</button>
-      </div>
-    </form>
+    <>
+      <Container className="mt-5 login-form-container text-center">
+        <Row className="justify-content-md-center">
+          <h2>Change your email or password</h2>
+
+          <Col lg={4} md={6} sm={12} className="mt-3">
+            <Formik
+              initialValues={{ password: "", email: "" }}
+              validationSchema={validationSchema}
+            >
+              {/* Callback function containing Formik state and helpers that handle common form actions */}
+              {({ values, errors, touched, handleChange, handleBlur }) => (
+                <Form className="d-grid gap-2" onSubmit={submitHandler}>
+                  <Form.Group className="mb-4" controlId="email">
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="New email"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      className={touched.email && errors.email ? "error" : null}
+                    />
+                    {touched.email && errors.email ? (
+                      <div className={classes["error-message"]}>
+                        {errors.email}
+                      </div>
+                    ) : null}
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="password">
+                    <Form.Control
+                      required
+                      type="password"
+                      placeholder="New Password"
+                      name="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                      className={
+                        touched.password && errors.password
+                          ? classes["error"]
+                          : null
+                      }
+                    />
+                    {touched.password && errors.password ? (
+                      <div className="error-message">{errors.password}</div>
+                    ) : null}
+                  </Form.Group>
+
+                  {!isLoading && (
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      type="submit"
+                      disabled={errors.password || errors.email}
+                    >
+                      Confirm
+                    </Button>
+                  )}
+
+                  {isLoading && (
+                    <Button variant="warning" disabled>
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      Loading...
+                    </Button>
+                  )}
+                </Form>
+              )}
+            </Formik>
+
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Header closeButton>
+                {/* <Modal.Title>Modal heading</Modal.Title> */}
+              </Modal.Header>
+              <Modal.Body>{errorMessages[error] || error}</Modal.Body>
+              <Modal.Footer>
+                <Button variant="warning" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ export function register(userData) {
   });
 }
 
-export function changePassword(userData) {
+export function updateUserInfo(userData) {
   return fetch(`${baseUrl}:update?key=${baseKey}`, {
     method: "POST",
     body: JSON.stringify(userData),

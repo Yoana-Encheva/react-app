@@ -82,7 +82,7 @@ const UserProfile = () => {
             </Row>
           </section>
         </Tab>
-        <Tab eventKey="profile" title="Security">
+        <Tab eventKey="profile" title="Change credentials">
           <ProfileForm />
         </Tab>
       </Tabs>
