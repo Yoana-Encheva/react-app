@@ -1,8 +1,23 @@
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
+import * as userService from "../services/user";
+
 import "./Login.css";
+
+const errorMessages = {
+  EMAIL_EXISTS: "This email already exists.",
+  INVALID_PASSWORD: "This password is not valid.",
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,8 +29,15 @@ const Login = () => {
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setError("");
+    setShow(false);
+  };
 
-  const switchAuthModeHandler = () => {
+  const switchAuthModeHandler = (event) => {
+    event.preventDefault();
     setIsLogin((oldState) => !oldState);
   };
 
@@ -24,26 +46,18 @@ const Login = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+    const userPayload = {
+      email: enteredEmail,
+      password: enteredPassword,
+      returnSecureToken: true,
+    };
 
     //to add validation here!
 
     setIsLoading(true);
 
-    let url = isLogin
-      ? "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCip7fnJIPC5Ukeb7P7fGPPGEZC2rQlIBU"
-      : "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCip7fnJIPC5Ukeb7P7fGPPGEZC2rQlIBU";
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    userService
+      .authenticate(userPayload, isLogin)
       .then((res) => {
         setIsLoading(false);
 
@@ -71,7 +85,9 @@ const Login = () => {
         navigate("/");
       })
       .catch((err) => {
-        alert(err.message);
+        console.log(err);
+        setError(err.message);
+        setShow(true);
       });
   };
 
@@ -90,6 +106,7 @@ const Login = () => {
                   ref={emailInputRef}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
                   required
@@ -98,14 +115,13 @@ const Login = () => {
                   ref={passwordInputRef}
                 />
               </Form.Group>
-              <Form.Text className="text-muted mb-3">
-                New to this site? Sign Up
-              </Form.Text>
+
               {!isLoading && (
                 <Button variant="warning" size="lg" type="submit">
                   {isLogin ? "Login" : "Create Account"}
                 </Button>
               )}
+
               {isLoading && (
                 <Button variant="warning" disabled>
                   <Spinner
@@ -118,6 +134,7 @@ const Login = () => {
                   Loading...
                 </Button>
               )}
+
               <Button
                 variant="warning"
                 size="lg"
@@ -127,6 +144,18 @@ const Login = () => {
                 {isLogin ? "Create new account" : "Login with existing account"}
               </Button>
             </Form>
+
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Header closeButton>
+                {/* <Modal.Title>Modal heading</Modal.Title> */}
+              </Modal.Header>
+              <Modal.Body>{errorMessages[error] || error}</Modal.Body>
+              <Modal.Footer>
+                <Button variant="warning" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </Col>
         </Row>
       </Container>
