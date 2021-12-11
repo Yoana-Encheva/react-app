@@ -21,6 +21,16 @@ export function register(userData) {
   });
 }
 
+export function changePassword(userData) {
+  return fetch(`${baseUrl}:update?key=${baseKey}`, {
+    method: "POST",
+    body: JSON.stringify(userData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 export function authenticate(userData, isLogin) {
   return isLogin ? login(userData) : register(userData);
 }

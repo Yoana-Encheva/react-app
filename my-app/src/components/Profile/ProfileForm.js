@@ -1,35 +1,29 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import classes from "./ProfileForm.module.css";
+import * as userService from "../../services/user";
 
 const ProfileForm = () => {
   const navigate = useNavigate();
 
-  const newPasswordInputRef = useRef();
   const authContext = useContext(AuthContext);
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const enteredNewPassword = newPasswordInputRef.current.value;
+    let { password } = Object.fromEntries(new FormData(event.currentTarget));
+
+    const userPayload = {
+      idToken: authContext.token,
+      password: password,
+      returnSecureToken: true,
+    };
 
     // to add validation
 
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCip7fnJIPC5Ukeb7P7fGPPGEZC2rQlIBU",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          idToken: authContext.token,
-          password: enteredNewPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    userService
+      .changePassword(userPayload)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -54,12 +48,14 @@ const ProfileForm = () => {
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
-        <label htmlFor="new-password">New Password</label>
+        <label htmlFor="password">New Password</label>
         <input
           type="password"
-          id="new-password"
+          id="password"
+          placeholder="Password"
           minLength="7"
-          ref={newPasswordInputRef}
+          defaultValue="password"
+          name="password"
         />
       </div>
       <div className={classes.action}>
