@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { Button, Form } from "react-bootstrap";
 
 function ArticleForm(props) {
   const authContext = useContext(AuthContext);
+  const [selectedCategory, setSelectedCategory] = useState(props.category);
+
+  function changeCategoryHandler(e) {
+    setSelectedCategory(e.target.value);
+  }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -13,7 +18,6 @@ function ArticleForm(props) {
     const enteredTitle = formData.get("title");
     const enteredImageUrl = formData.get("url");
     const enteredDescription = formData.get("description");
-    const enteredCategory = formData.get("category");
 
     const newFormData = {
       title: enteredTitle,
@@ -21,7 +25,7 @@ function ArticleForm(props) {
       description: enteredDescription,
       created: props?.created || new Date(),
       createdBy: authContext.userId,
-      category: enteredCategory,
+      category: selectedCategory,
     };
 
     props.onSubmit(newFormData);
@@ -35,6 +39,8 @@ function ArticleForm(props) {
           id="category"
           name="category"
           required
+          value={selectedCategory || props.category}
+          onChange={changeCategoryHandler}
         >
           <option value="activeLife">Active life</option>
           <option value="stories">Stories</option>

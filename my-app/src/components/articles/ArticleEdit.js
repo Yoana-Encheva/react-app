@@ -51,6 +51,8 @@ const ArticleEdit = () => {
                 onSubmit={editArticleHandler}
                 title={article?.title}
                 image={article?.image}
+                category={article?.category}
+                created={article?.created}
                 description={article?.description}
                 buttonLabel="Edit article"
               />

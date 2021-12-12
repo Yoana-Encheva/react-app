@@ -26,7 +26,9 @@ function Blog() {
       }
 
       setIsLoading(false);
-      setArticles(articles);
+      setArticles(
+        articles.sort((a, b) => new Date(b.created) - new Date(a.created))
+      );
     });
   }, []);
 
