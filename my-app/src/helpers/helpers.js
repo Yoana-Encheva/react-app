@@ -21,4 +21,22 @@ const errorMessages = {
   INVALID_PASSWORD: "This password is not valid.",
 };
 
-export { validationSchema, errorMessages };
+const categories = {
+  activeLife: { label: "Active life", color: "info" },
+  stories: { label: "Stories", color: "secondary" },
+  loseWeight: { label: "Lose weight", color: "success" },
+  healthy: { label: "Healthy food", color: "danger" },
+  inspiration: { label: "Inspiration", color: "dark" },
+};
+
+const dateOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
+const formattedDate = (date) => {
+  return new Date(date).toLocaleDateString("en-US", dateOptions);
+};
+
+export { validationSchema, errorMessages, categories, formattedDate };

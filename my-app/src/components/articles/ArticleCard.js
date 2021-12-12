@@ -1,20 +1,11 @@
 import { Link } from "react-router-dom";
-import { Button, Card } from "react-bootstrap";
+import { Badge, Button, Card } from "react-bootstrap";
 import classes from "./ArticleCard.module.css";
+import { categories, formattedDate } from "../../helpers/helpers";
 
 function ArticleCard(props) {
   const defaultUrl =
     "https://cdn.pixabay.com/photo/2015/05/26/09/23/board-784363__340.jpg";
-
-  const dateOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-
-  const formattedDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", dateOptions);
-  };
 
   return (
     <>
@@ -33,8 +24,13 @@ function ArticleCard(props) {
           className={classes["card"]}
         >
           <Card.Body className={classes["card-body"]}>
-            <Card.Title>{props.title}</Card.Title>
-            <Card.Subtitle>{formattedDate(props.createdOn)}</Card.Subtitle>
+            <Card.Title>{props.title} </Card.Title>
+            <Card.Subtitle>
+              {formattedDate(props.createdOn)}{" "}
+              <Badge pill bg={categories[props.category]?.color || "warning"}>
+                {categories[props.category]?.label || "Other"}
+              </Badge>
+            </Card.Subtitle>
             <Card.Text className={classes["card-text-content"]}>
               {props.description}
             </Card.Text>

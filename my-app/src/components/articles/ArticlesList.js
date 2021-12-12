@@ -9,6 +9,7 @@ function ArticlesList(props) {
           <Article
             key={article.id}
             id={article.id}
+            category={article.category}
             createdOn={article.created}
             description={article.description}
             image={article.image}

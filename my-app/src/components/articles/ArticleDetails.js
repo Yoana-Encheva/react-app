@@ -2,7 +2,16 @@ import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as articlesService from "../../services/articles";
 import AuthContext from "../../store/auth-context";
-import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Card,
+  Col,
+  Container,
+  Row,
+  Spinner,
+} from "react-bootstrap";
+import { categories, formattedDate } from "../../helpers/helpers";
 
 const ArticleDetails = () => {
   const { id } = useParams();
@@ -42,7 +51,21 @@ const ArticleDetails = () => {
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
             <Card>
-              <Card.Header>{selectedArticle.title}</Card.Header>
+              <Card.Header>
+                <Card.Title>{selectedArticle.title} </Card.Title>
+                <Card.Subtitle>
+                  {formattedDate(selectedArticle.created)}{" "}
+                  <Badge
+                    pill
+                    bg={
+                      categories[selectedArticle.category]?.color || "warning"
+                    }
+                  >
+                    {categories[selectedArticle.category]?.label || "Other"}
+                  </Badge>
+                </Card.Subtitle>
+              </Card.Header>
+
               <Card.Img variant="top" src={selectedArticle.image} />
               <Card.Body>
                 <Card.Text>{selectedArticle.description}</Card.Text>

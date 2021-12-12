@@ -5,6 +5,7 @@ function Article(props) {
     <ArticleCard
       key={props.id}
       id={props.id}
+      category={props.category}
       createdOn={props.createdOn}
       description={props.description}
       image={props.image}

@@ -11,9 +11,7 @@ const Contacts = () => {
           src="https://cdn.pixabay.com/photo/2014/11/17/13/17/crossfit-534615_960_720.jpg"
         />
         <Card.Body>
-          <Card.Text>
-            <h1 className="mt-3 mb-3">Contact us</h1>
-          </Card.Text>
+          <h1 className="mt-3 mb-3">Contact us</h1>
         </Card.Body>
       </Card>
 
@@ -30,8 +28,7 @@ const Contacts = () => {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label>
-                    {" "}
-                    <h2> Name </h2>{" "}
+                    <h2>Name</h2>
                   </Form.Label>
                   <Form.Control type="text" placeholder="Name" />
                 </Form.Group>
@@ -41,8 +38,7 @@ const Contacts = () => {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label>
-                    {" "}
-                    <h2> Email Address </h2>{" "}
+                    <h2>Email Address</h2>
                   </Form.Label>
                   <Form.Control type="email" placeholder="name@example.com" />
                 </Form.Group>
@@ -52,8 +48,7 @@ const Contacts = () => {
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>
-                    {" "}
-                    <h2> How can we help?</h2>{" "}
+                    <h2>How can we help?</h2>
                   </Form.Label>
                   <Form.Control as="textarea" rows={3} />
                 </Form.Group>
@@ -67,7 +62,7 @@ const Contacts = () => {
         </Container>
       </div>
 
-      <h1 className="mt-3 mb-3"> Our locations</h1>
+      <h1 className="mt-3 mb-3">Our locations</h1>
       <Container className="mb-4">
         <Row className={"justify-content-around"}>
           <Col xs={12} lg={4} className="mt-4">
@@ -92,12 +87,10 @@ const Contacts = () => {
                     title="location"
                   />
                 </Card.Title>
+                <Card.Text>LOCATION:</Card.Text>
                 <Card.Text>
-                  <h3> LOCATION:</h3>
-                  <p>
-                    Harrogate, UK 56 Burley Bank Road Killinghall HG3 2RZ Tel:
-                    01865 58 9595
-                  </p>
+                  Harrogate, UK 56 Burley Bank Road Killinghall HG3 2RZ Tel:
+                  01865 58 9595
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -125,12 +118,10 @@ const Contacts = () => {
                     title="location"
                   />
                 </Card.Title>
+                <Card.Text>LOCATION:</Card.Text>
                 <Card.Text>
-                  <h3> LOCATION:</h3>
-                  <p>
-                    Harrogate, UK 56 Burley Bank Road Killinghall HG3 2RZ Tel:
-                    01865 58 9595
-                  </p>
+                  Harrogate, UK 56 Burley Bank Road Killinghall HG3 2RZ Tel:
+                  01865 58 9595
                 </Card.Text>
               </Card.Body>
             </Card>
