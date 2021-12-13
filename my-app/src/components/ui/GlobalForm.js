@@ -47,7 +47,7 @@ function GlobalForm(props) {
           <Form.Control
             as="textarea"
             rows={3}
-            maxLength="200"
+            maxLength="2000"
             id="description"
             required
             name="description"

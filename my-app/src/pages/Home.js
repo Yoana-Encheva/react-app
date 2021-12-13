@@ -10,6 +10,7 @@ import {
 import classes from "./Home.module.css";
 import aboutUsImage from "../assets/img/about-us-4.jpg";
 import sample from "../assets/video/sample-1.mp4";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -39,16 +40,13 @@ const Home = () => {
         <Container className={classes["class-section"] + "mt-4"}>
           <Row className="justify-content-md-center g-4">
             <Col bg="primary" md="12">
-              <h2 className={"primary"}> Meet our classes and coaches</h2>
+              <h2 className={"primary"}>Meet our classes and coaches</h2>
             </Col>
             <hr />
             <Col md="10">
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium blanditiis officiis quisquam recusandae
-                reprehenderit. Accusantium deleniti eos est facere reprehenderit
-                sapiente sint voluptatem. Asperiores autem beatae laboriosam
-                officia quae, temporibus.
+                Check our new classes and find out a little bit more for our top
+                coaches
               </span>
             </Col>
           </Row>
@@ -58,21 +56,23 @@ const Home = () => {
               <Card
                 bg={"primary"}
                 key={"primary"}
-                text={"white"}
+                text={"secondary"}
                 className="mb-2"
+                as={Link}
+                to="/classes"
               >
                 <Card.Img
-                  className="mb-5"
+                  className="mb-3"
                   variant="top"
                   src="https://images.everydayhealth.com/images/tips-to-help-you-stick-with-exercise-when-managing-type-2-diabetes-alt-722x406.jpg?w=720"
                   alt="Card image"
                 />
 
                 <Card.Body>
-                  <Card.Title> CLASSES</Card.Title>
+                  <Card.Title>CLASSES</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Looking to start a new class? Check all of our great classes
+                    and pick up the best for you.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -82,21 +82,24 @@ const Home = () => {
               <Card
                 bg={"primary"}
                 key={"primary"}
-                text={"white"}
+                text={"secondary"}
                 className="mb-2"
+                as={Link}
+                to="/coaches"
+                style={{ cursor: "pointer" }}
               >
                 <Card.Img
-                  className="mb-5"
+                  className="mb-3"
                   variant="top"
                   src="https://www.wellnessliving.com/blog/wp-content/uploads/2019/02/Fitness-Instructor-Certifications-1024x577.jpg"
                   alt="Card image"
                 />
 
                 <Card.Body>
-                  <Card.Title> COACHES</Card.Title>
+                  <Card.Title>COACHES</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    See our top coaches. Learn more about them and get
+                    inspiration for your next goal.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -109,7 +112,7 @@ const Home = () => {
         <Container className={classes["class-section"] + "mt-4"}>
           <Row className="justify-content-md-center g-4">
             <Col bg="primary" md="12">
-              <h2 className={"primary"}> About us</h2>
+              <h2 className={"primary"}>About us</h2>
             </Col>
             <hr />
             <Col md="10"></Col>
@@ -129,15 +132,19 @@ const Home = () => {
                 border="light"
               >
                 <Card.Body>
-                  <Card.Title> CLASSES</Card.Title>
+                  <Card.Title> Yo Fit</Card.Title>
                   <Card.Text>
-                    <span>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Accusantium blanditiis officiis quisquam recusandae
-                      reprehenderit. Accusantium deleniti eos est facere
-                      reprehenderit sapiente sint voluptatem. Asperiores autem
-                      beatae laboriosam officia quae, temporibus.
-                    </span>
+                    Yo Fit is an innovative, community-focused charity committed
+                    to making a positive impact on the health and wellbeing of
+                    our community.
+                  </Card.Text>
+                  <Card.Text>
+                    Any surplus that is made is reinvested in the facilities and
+                    the local community.
+                  </Card.Text>
+                  <Card.Text>
+                    We have been a charitable trust since 2004 and have been at
+                    the forefront of sport and leisure in Yo Fit.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -177,12 +184,11 @@ const Home = () => {
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          Simply, with their help I achieved my goal of putting
+                          on weight, one which I have struggled with for years.
+                          With their help I have gained 13kg+ and my strength
+                          has more than doubled. They really helped me by giving
+                          me the tools to grow. regimes.
                         </span>
                       </Card.Text>
                     </Card.Body>
@@ -200,7 +206,7 @@ const Home = () => {
                     <Card.Body>
                       <Card.Title className="justify-content-center">
                         <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          src="https://cdn.pixabay.com/photo/2016/12/02/08/30/fitness-1877209__340.jpg"
                           roundedCircle
                           fluid
                           style={{
@@ -209,16 +215,15 @@ const Home = () => {
                             objectFit: "cover",
                           }}
                         />
-                        <p> John Doe </p>
+                        <p> Anna Petrova </p>
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          I would recommend Yo Fit in a heartbeat having also
+                          met and trained with a couple of the other trainers in
+                          this company. I aim to continue to train and maintain
+                          a good level of fitness with their help for a long
+                          time to come.
                         </span>
                       </Card.Text>
                     </Card.Body>
@@ -236,7 +241,7 @@ const Home = () => {
                     <Card.Body>
                       <Card.Title className="justify-content-center">
                         <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          src="https://cdn.pixabay.com/photo/2017/08/06/05/42/people-2589176_960_720.jpg"
                           roundedCircle
                           fluid
                           style={{
@@ -245,16 +250,15 @@ const Home = () => {
                             objectFit: "cover",
                           }}
                         />
-                        <p> John Doe </p>
+                        <p> Peter Pavlov</p>
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          Yo Fit Personal Training is really great. I was skinny
+                          but too unmotivated and shy to go to the gym. I had
+                          Russell Laurie as my personal trainer and now I
+                          noticed a positive change in my appearance. I am happy
+                          and now more confident with myself.
                         </span>
                       </Card.Text>
                     </Card.Body>
@@ -275,7 +279,7 @@ const Home = () => {
                     <Card.Body>
                       <Card.Title className="justify-content-center">
                         <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          src="https://cdn.pixabay.com/photo/2017/08/12/18/31/male-2634974_960_720.jpg"
                           roundedCircle
                           fluid
                           style={{
@@ -284,16 +288,15 @@ const Home = () => {
                             objectFit: "cover",
                           }}
                         />
-                        <p> John Doe </p>
+                        <p> Hristo Ivanov </p>
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          I’ve been training with Dave for almost 3 years now,
+                          and believe he is one of the most experienced &
+                          committed trainers around. I started training once a
+                          week, as part of a group session, really enjoyed the
+                          variety & challenge
                         </span>
                       </Card.Text>
                     </Card.Body>
@@ -311,7 +314,7 @@ const Home = () => {
                     <Card.Body>
                       <Card.Title className="justify-content-center">
                         <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          src="https://cdn.pixabay.com/photo/2020/06/20/16/13/male-5321547_960_720.jpg"
                           roundedCircle
                           fluid
                           style={{
@@ -320,16 +323,15 @@ const Home = () => {
                             objectFit: "cover",
                           }}
                         />
-                        <p> John Doe </p>
+                        <p> Kiril Mihalev </p>
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          What I like about Dave from Yo Fit is that he knows
+                          how to motivate me, he makes each of my training
+                          sessions challenging but rewarding. I would have no
+                          hesitation in recommending him as your personal
+                          trainer.
                         </span>
                       </Card.Text>
                     </Card.Body>
@@ -347,7 +349,7 @@ const Home = () => {
                     <Card.Body>
                       <Card.Title className="justify-content-center">
                         <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
+                          src="https://cdn.pixabay.com/photo/2016/09/21/21/46/sport-1685786_960_720.jpg"
                           roundedCircle
                           fluid
                           style={{
@@ -356,127 +358,15 @@ const Home = () => {
                             objectFit: "cover",
                           }}
                         />
-                        <p> John Doe </p>
+                        <p> Stoyan Stoyanov </p>
                       </Card.Title>
                       <Card.Text>
                         <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Row>
-                <Col>
-                  <Card
-                    bg={"blue"}
-                    key={"primary"}
-                    text={"white"}
-                    className="mb-2"
-                    border="light"
-                  >
-                    <Card.Body>
-                      <Card.Title className="justify-content-center">
-                        <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
-                          roundedCircle
-                          fluid
-                          style={{
-                            height: "200px",
-                            width: "200px",
-                            objectFit: "cover",
-                          }}
-                        />
-                        <p> John Doe </p>
-                      </Card.Title>
-                      <Card.Text>
-                        <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-
-                <Col>
-                  <Card
-                    bg={"blue"}
-                    key={"primary"}
-                    text={"white"}
-                    className="mb-2"
-                    border="light"
-                  >
-                    <Card.Body>
-                      <Card.Title className="justify-content-center">
-                        <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
-                          roundedCircle
-                          fluid
-                          style={{
-                            height: "200px",
-                            width: "200px",
-                            objectFit: "cover",
-                          }}
-                        />
-                        <p> John Doe </p>
-                      </Card.Title>
-                      <Card.Text>
-                        <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-
-                <Col>
-                  <Card
-                    bg={"blue"}
-                    key={"primary"}
-                    text={"white"}
-                    className="mb-2"
-                    border="light"
-                  >
-                    <Card.Body>
-                      <Card.Title className="justify-content-center">
-                        <Image
-                          src="https://cdn.pixabay.com/photo/2016/03/26/20/35/young-man-1281282_960_720.jpg"
-                          roundedCircle
-                          fluid
-                          style={{
-                            height: "200px",
-                            width: "200px",
-                            objectFit: "cover",
-                          }}
-                        />
-                        <p> John Doe </p>
-                      </Card.Title>
-                      <Card.Text>
-                        <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Accusantium blanditiis officiis quisquam
-                          recusandae reprehenderit. Accusantium deleniti eos est
-                          facere reprehenderit sapiente sint voluptatem.
-                          Asperiores autem beatae laboriosam officia quae,
-                          temporibus.
+                          Signing up with Yo Fit was one of the best things I
+                          have ever done! Dave my trainer has helped me achieve
+                          my goals so far and I love our sessions. He makes it
+                          fun and enjoyable to train and he is very motivating
+                          and encouraging!
                         </span>
                       </Card.Text>
                     </Card.Body>

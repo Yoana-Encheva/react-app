@@ -23,7 +23,11 @@ function CoachCard(props) {
       </div>
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
-        <Card.Text>{props.description}</Card.Text>
+        <Card.Text>
+          {props.description.length < 320
+            ? `${props.description}`
+            : `${props.description.substring(0, 320)}...`}
+        </Card.Text>
         <Link to={`/coaches/${props.id}/details`}>
           <Button variant="outline-dark">Read More</Button>
         </Link>

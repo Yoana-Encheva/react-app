@@ -35,4 +35,7 @@
 
 .card-text-content {
   flex: 2;
+  font-size: 0.9rem !important;
+  font-style: italic;
+  margin: 10px 0;
 }

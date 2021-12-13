@@ -48,7 +48,7 @@ const ArticleDetails = () => {
   return (
     <>
       <Container className="mt-5 text-center">
-        <Row>
+        <Row className="mb-5">
           <Col md={{ span: 6, offset: 3 }}>
             <Card>
               <Card.Header>

@@ -32,7 +32,9 @@ function ArticleCard(props) {
               </Badge>
             </Card.Subtitle>
             <Card.Text className={classes["card-text-content"]}>
-              {props.description}
+              {props.description.length < 320
+                ? `${props.description}`
+                : `${props.description.substring(0, 320)}...`}
             </Card.Text>
             <Link to={`/articles/${props.id}/details`}>
               <Button variant="outline-dark">Read More</Button>
