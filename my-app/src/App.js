@@ -11,8 +11,8 @@ import ClassDetails from "./components/classes/ClassDetails";
 import ClassEdit from "./components/classes/ClassEdit";
 import CoachDetails from "./components/coaches/CoachDetails";
 import CoachEdit from "./components/coaches/CoachEdit";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/ui/Footer";
+import Header from "./components/ui/Header";
 import UserProfile from "./components/Profile/UserProfile";
 import Notification from "./components/common/Notification";
 

@@ -1,7 +1,7 @@
 import { Nav, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
-import logo from "../assets/img/yo-fit-logo.png";
+import logo from "../../assets/img/yo-fit-logo.png";
 
 const Footer = () => {
   return (

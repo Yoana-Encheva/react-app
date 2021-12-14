@@ -1,9 +1,10 @@
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../store/auth-context";
+import AuthContext from "../../store/auth-context";
+
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import classes from "./Header.module.css";
-import logo from "../assets/img/yo-fit-logo.png";
+import logo from "../../assets/img/yo-fit-logo.png";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
