@@ -2,33 +2,21 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../store/auth-context";
+import { useNotificationContext, types } from "../store/notification-context";
 import * as userService from "../services/user";
 import { validationSchema, errorMessages } from "../helpers/helpers";
 
 import { Formik } from "formik";
 
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Modal,
-  Row,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const { addNotification } = useNotificationContext();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setError("");
-    setShow(false);
-  };
 
   const switchAuthModeHandler = (event) => {
     event.preventDefault();
@@ -59,15 +47,19 @@ const Login = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            throw new Error(
-              data?.error?.message
-                ? data.error.message
-                : "Unsuccessful Authentication!"
+            addNotification(
+              data?.error?.message || "Unsuccessful Authentication!"
             );
           });
         }
       })
       .then((data) => {
+        addNotification(
+          isLogin
+            ? "You logged in successfully"
+            : "You created profile successfully",
+          types.success
+        );
         const expirationTime = new Date(
           new Date().getTime() + Number(data.expiresIn * 1000)
         );
@@ -79,8 +71,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((err) => {
-        setError(err.message);
-        setShow(true);
+        addNotification(errorMessages[err.message] || err.message);
       });
   };
 
@@ -167,18 +158,6 @@ const Login = () => {
                 </Form>
               )}
             </Formik>
-
-            <Modal show={show} onHide={handleClose} centered>
-              <Modal.Header closeButton>
-                {/* <Modal.Title>Modal heading</Modal.Title> */}
-              </Modal.Header>
-              <Modal.Body>{errorMessages[error] || error}</Modal.Body>
-              <Modal.Footer>
-                <Button variant="warning" onClick={handleClose}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
           </Col>
         </Row>
       </Container>

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import AuthContext from "./store/auth-context";
+import { NotificationProvider } from "./store/notification-context";
 
 import "./App.css";
 
@@ -13,6 +14,7 @@ import CoachEdit from "./components/coaches/CoachEdit";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import UserProfile from "./components/Profile/UserProfile";
+import Notification from "./components/common/Notification";
 
 import About from "./pages/About";
 import Blog from "./pages/Blog";
@@ -32,75 +34,78 @@ function App() {
   const isAdmin = authContext.role === "admin";
 
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/about" element={<About />} />
+    <NotificationProvider>
+      <div className="App">
+        <Header />
+        <Notification />
+        <main>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/about" element={<About />} />
 
-          <Route path="/classes" element={<Classes />} />
-          <Route
-            path="/new-class"
-            element={isAdmin ? <NewClassPage /> : <Navigate to="/" />}
-          />
-          <Route path="/:id/details" element={<ClassDetails />} />
-          <Route
-            path="/:id/edit"
-            element={isAdmin ? <ClassEdit /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/:id/delete"
-            element={isAdmin ? <Classes /> : <Navigate to="/" />}
-          />
+            <Route path="/classes" element={<Classes />} />
+            <Route
+              path="/new-class"
+              element={isAdmin ? <NewClassPage /> : <Navigate to="/" />}
+            />
+            <Route path="/:id/details" element={<ClassDetails />} />
+            <Route
+              path="/:id/edit"
+              element={isAdmin ? <ClassEdit /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/:id/delete"
+              element={isAdmin ? <Classes /> : <Navigate to="/" />}
+            />
 
-          <Route path="/coaches" element={<Coaches />} />
-          <Route
-            path="/new-coach"
-            element={isAdmin ? <NewCoachPage /> : <Navigate to="/" />}
-          />
-          <Route path="/coaches/:id/details" element={<CoachDetails />} />
-          <Route
-            path="/coaches/:id/edit"
-            element={isAdmin ? <CoachEdit /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/coaches/:id/delete"
-            element={isAdmin ? <Coaches /> : <Navigate to="/" />}
-          />
+            <Route path="/coaches" element={<Coaches />} />
+            <Route
+              path="/new-coach"
+              element={isAdmin ? <NewCoachPage /> : <Navigate to="/" />}
+            />
+            <Route path="/coaches/:id/details" element={<CoachDetails />} />
+            <Route
+              path="/coaches/:id/edit"
+              element={isAdmin ? <CoachEdit /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/coaches/:id/delete"
+              element={isAdmin ? <Coaches /> : <Navigate to="/" />}
+            />
 
-          <Route path="/contacts" element={<Contacts />} />
+            <Route path="/contacts" element={<Contacts />} />
 
-          <Route path="/blog" element={<Blog />} />
-          <Route
-            path="/new-article"
-            element={isLoggedIn ? <NewArticlePage /> : <Navigate to="/" />}
-          />
-          <Route path="/articles/:id/details" element={<ArticleDetails />} />
-          <Route
-            path="/articles/:id/edit"
-            element={isLoggedIn ? <ArticleEdit /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/articles/:id/delete"
-            element={isLoggedIn ? <Blog /> : <Navigate to="/" />}
-          />
+            <Route path="/blog" element={<Blog />} />
+            <Route
+              path="/new-article"
+              element={isLoggedIn ? <NewArticlePage /> : <Navigate to="/" />}
+            />
+            <Route path="/articles/:id/details" element={<ArticleDetails />} />
+            <Route
+              path="/articles/:id/edit"
+              element={isLoggedIn ? <ArticleEdit /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/articles/:id/delete"
+              element={isLoggedIn ? <Blog /> : <Navigate to="/" />}
+            />
 
-          <Route
-            path="/login"
-            element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
-          />
-          <Route path="/logout" element={<Navigate to="/" />} />
-          <Route
-            path="/profile"
-            element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
-          />
-          <Route path="/404" element={<NotFoundPage />} />
-          <Route path="*" element={<Navigate to="/404" />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+            <Route
+              path="/login"
+              element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
+            />
+            <Route path="/logout" element={<Navigate to="/" />} />
+            <Route
+              path="/profile"
+              element={isLoggedIn ? <UserProfile /> : <Navigate to="/login" />}
+            />
+            <Route path="/404" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </NotificationProvider>
   );
 }
 
