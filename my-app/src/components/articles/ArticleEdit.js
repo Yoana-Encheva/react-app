@@ -2,14 +2,18 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import AuthContext from "../../store/auth-context";
-
 import * as articlesService from "../../services/articles";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 
 import ArticleForm from "./ArticleForm";
 import { Container, Col, Row, Spinner } from "react-bootstrap";
 
 const ArticleEdit = () => {
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
 
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +32,7 @@ const ArticleEdit = () => {
 
   function editArticleHandler(articleData) {
     articlesService.edit(articleData, id).then(() => {
+      addNotification("Article edited successfully", types.info);
       navigate("/blog");
     });
   }

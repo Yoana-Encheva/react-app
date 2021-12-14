@@ -9,9 +9,7 @@ const Header = () => {
   const authContext = useContext(AuthContext);
   const isLoggedIn = authContext.isLoggedIn;
 
-  const logoutHandler = () => {
-    authContext.logout();
-  };
+  const logoutHandler = () => {};
 
   return (
     <Navbar

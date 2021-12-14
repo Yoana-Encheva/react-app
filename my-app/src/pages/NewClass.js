@@ -2,12 +2,15 @@ import GlobalForm from "../components/ui/GlobalForm";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as classesService from "../services/classes";
+import { useNotificationContext, types } from "../store/notification-context";
 
 function NewClassPage() {
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
 
   function addClassHandler(classData) {
     classesService.create(classData).then(() => {
+      addNotification("New class added successfully", types.success);
       navigate("/classes");
     });
   }

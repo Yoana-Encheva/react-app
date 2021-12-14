@@ -3,11 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Container, Col, Row, Spinner } from "react-bootstrap";
 
 import * as coachesService from "../../services/coaches";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 import GlobalForm from "../ui/GlobalForm";
 
 const CoachEdit = () => {
   const navigate = useNavigate();
-
+  const { addNotification } = useNotificationContext();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [coach, setCoach] = useState({});
@@ -21,6 +25,7 @@ const CoachEdit = () => {
 
   function editCoachHandler(coachData) {
     coachesService.edit(coachData, id).then(() => {
+      addNotification("Coach info edited successfully", types.info);
       navigate("/coaches");
     });
   }

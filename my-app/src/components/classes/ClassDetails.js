@@ -1,12 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import * as classesService from "../../services/classes";
 import AuthContext from "../../store/auth-context";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ClassDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedClass, setSelectedClass] = useState({});
   const authContext = useContext(AuthContext);
@@ -23,6 +28,7 @@ const ClassDetails = () => {
     e.preventDefault();
 
     classesService.deleteClass(id).then(() => {
+      addNotification("Class deleted successfully", types.warn);
       navigate("/classes");
     });
   };

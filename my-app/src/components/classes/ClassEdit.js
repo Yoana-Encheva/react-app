@@ -3,11 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Container, Col, Row, Spinner } from "react-bootstrap";
 
 import * as classesService from "../../services/classes";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 import GlobalForm from "../ui/GlobalForm";
 
 const ClassEdit = () => {
   const navigate = useNavigate();
-
+  const { addNotification } = useNotificationContext();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedClass, setSelectedClass] = useState({});
@@ -21,6 +25,7 @@ const ClassEdit = () => {
 
   function editClassHandler(classData) {
     classesService.edit(classData, id).then(() => {
+      addNotification("Class edited successfully", types.info);
       navigate("/classes");
     });
   }

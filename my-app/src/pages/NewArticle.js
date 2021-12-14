@@ -1,13 +1,16 @@
-import ArticleForm from "../components/articles/ArticleForm";
-import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as articlesService from "../services/articles";
+import { useNotificationContext, types } from "../store/notification-context";
+import ArticleForm from "../components/articles/ArticleForm";
+import { Col, Container, Row } from "react-bootstrap";
 
 function NewArticlePage() {
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
 
   function addArticleHandler(articleData) {
     articlesService.create(articleData).then(() => {
+      addNotification("New article added successfully", types.success);
       navigate("/blog");
     });
   }

@@ -1,12 +1,17 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as coachesService from "../../services/coaches";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 import AuthContext from "../../store/auth-context";
 import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 
 const CoachDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoach, setSelectedCoach] = useState({});
   const authContext = useContext(AuthContext);
@@ -23,6 +28,7 @@ const CoachDetails = () => {
     e.preventDefault();
 
     coachesService.deleteCoach(id).then(() => {
+      addNotification("Coach deleted successfully", types.warn);
       navigate("/coaches");
     });
   };

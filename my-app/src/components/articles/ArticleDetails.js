@@ -1,6 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as articlesService from "../../services/articles";
+import {
+  useNotificationContext,
+  types,
+} from "../../store/notification-context";
 import AuthContext from "../../store/auth-context";
 import {
   Badge,
@@ -16,6 +20,7 @@ import { categories, formattedDate } from "../../helpers/helpers";
 const ArticleDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addNotification } = useNotificationContext();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState({});
   const authContext = useContext(AuthContext);
@@ -33,6 +38,7 @@ const ArticleDetails = () => {
     e.preventDefault();
 
     articlesService.deleteArticle(id).then(() => {
+      addNotification("Article deleted successfully", types.warn);
       navigate("/blog");
     });
   };
