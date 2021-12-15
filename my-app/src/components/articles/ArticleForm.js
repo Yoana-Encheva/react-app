@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
+import { validationSchema } from "../../helpers/helpers";
+import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
+import classes from "./ArticleForm.module.css";
 
 function ArticleForm(props) {
   const authContext = useContext(AuthContext);
@@ -33,57 +36,95 @@ function ArticleForm(props) {
 
   return (
     <>
-      <Form onSubmit={submitHandler}>
-        <Form.Select
-          aria-label="Select category dropdown"
-          id="category"
-          name="category"
-          required
-          value={selectedCategory || props.category}
-          onChange={changeCategoryHandler}
-        >
-          <option value="activeLife">Active life</option>
-          <option value="stories">Stories</option>
-          <option value="loseWeight">Lose weight</option>
-          <option value="healthy">Healthy food</option>
-          <option value="inspiration">Inspiration</option>
-        </Form.Select>
-        <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            required
-            id="title"
-            name="title"
-            defaultValue={props.title ?? ""}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Image Url</Form.Label>
-          <Form.Control
-            type="url"
-            required
-            id="url"
-            name="url"
-            defaultValue={props.image ?? ""}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            maxLength="2000"
-            id="description"
-            required
-            name="description"
-            defaultValue={props.description ?? ""}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          {props.buttonLabel}
-        </Button>
-      </Form>
+      <Formik
+        initialValues={{
+          title: props.title ?? "",
+          url: props.image ?? "",
+          description: props.description ?? "",
+        }}
+        validationSchema={validationSchema}
+      >
+        {/* Callback function containing Formik state and helpers that handle common form actions */}
+        {({ values, errors, touched, handleChange, handleBlur }) => (
+          <Form onSubmit={submitHandler}>
+            <Form.Select
+              aria-label="Select category dropdown"
+              id="category"
+              name="category"
+              required
+              value={selectedCategory || props.category}
+              onChange={changeCategoryHandler}
+            >
+              <option value="activeLife">Active life</option>
+              <option value="stories">Stories</option>
+              <option value="loseWeight">Lose weight</option>
+              <option value="healthy">Healthy food</option>
+              <option value="inspiration">Inspiration</option>
+            </Form.Select>
+            <Form.Group className="mb-3">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                id="title"
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  touched.title && errors.title ? classes["error"] : null
+                }
+              />
+              {touched.title && errors.title ? (
+                <div className={classes["error-message"]}>{errors.title}</div>
+              ) : null}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Image Url</Form.Label>
+              <Form.Control
+                type="url"
+                id="url"
+                name="url"
+                value={values.url}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={touched.url && errors.url ? classes["error"] : null}
+              />
+              {touched.url && errors.url ? (
+                <div className={classes["error-message"]}>{errors.url}</div>
+              ) : null}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                id="description"
+                name="description"
+                defaultValue={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  touched.description && errors.description
+                    ? classes["error"]
+                    : null
+                }
+              />
+              {touched.description && errors.description ? (
+                <div className={classes["error-message"]}>
+                  {errors.description}
+                </div>
+              ) : null}
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={errors.title || errors.url || errors.description}
+            >
+              {props.buttonLabel}
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 }

@@ -12,6 +12,15 @@ const validationSchema = Yup.object().shape({
     .max(100, "*Email must be less than 100 characters")
     .required("*Email is required")
     .test((value) => EmailValidator.validate(value)),
+  title: Yup.string()
+    .min(6, "*Title must have at least 4 characters.")
+    .max(30, "*Title can't be longer than 30 characters.")
+    .required("*Title is required."),
+  url: Yup.string().required("*Image Url is required."),
+  description: Yup.string()
+    .min(10, "*Description must have at least 10 characters.")
+    .max(2000, "*Description can't be longer than 2000 characters.")
+    .required("*Description is required."),
 });
 
 const errorMessages = {
