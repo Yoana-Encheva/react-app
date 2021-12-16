@@ -17,7 +17,6 @@ function ArticleForm(props) {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
-
     const enteredTitle = formData.get("title");
     const enteredImageUrl = formData.get("url");
     const enteredDescription = formData.get("description");
@@ -38,9 +37,9 @@ function ArticleForm(props) {
     <>
       <Formik
         initialValues={{
-          title: props.title ?? "",
-          url: props.image ?? "",
-          description: props.description ?? "",
+          title: "",
+          url: "",
+          description: "",
         }}
         validationSchema={validationSchema}
       >
@@ -67,7 +66,8 @@ function ArticleForm(props) {
                 type="text"
                 id="title"
                 name="title"
-                value={values.title}
+                required
+                defaultValue={props.title ?? ""}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={
@@ -84,7 +84,8 @@ function ArticleForm(props) {
                 type="url"
                 id="url"
                 name="url"
-                value={values.url}
+                required
+                defaultValue={props.image ?? ""}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={touched.url && errors.url ? classes["error"] : null}
@@ -100,7 +101,8 @@ function ArticleForm(props) {
                 rows={3}
                 id="description"
                 name="description"
-                defaultValue={values.description}
+                required
+                defaultValue={props.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={
@@ -118,7 +120,11 @@ function ArticleForm(props) {
             <Button
               variant="primary"
               type="submit"
-              disabled={errors.title || errors.url || errors.description}
+              disabled={
+                (touched.title && errors.title) ||
+                (touched.url && errors.url) ||
+                (touched.description && errors.description)
+              }
             >
               {props.buttonLabel}
             </Button>
