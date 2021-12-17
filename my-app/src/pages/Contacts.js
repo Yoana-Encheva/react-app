@@ -1,7 +1,33 @@
+import * as requestsService from "../services/requests";
+import { useNotificationContext, types } from "../store/notification-context";
 import { Card, Col, Container, Row, Form, Button } from "react-bootstrap";
 import classes from "./Contacts.module.css";
 
 const Contacts = () => {
+  const { addNotification } = useNotificationContext();
+
+  function submitHandler(event) {
+    event.preventDefault();
+
+    let formData = new FormData(event.currentTarget);
+    const enteredName = formData.get("name");
+    const enteredEmail = formData.get("email");
+    const enteredRequest = formData.get("request");
+
+    const newFormData = {
+      name: enteredName,
+      email: enteredEmail,
+      request: enteredRequest,
+    };
+
+    requestsService.create(newFormData).then(() => {
+      event.target.name.value = "";
+      event.target.email.value = "";
+      event.target.request.value = "";
+
+      addNotification("Request sent successfully", types.info);
+    });
+  }
   return (
     <div>
       <Card>
@@ -22,35 +48,47 @@ const Contacts = () => {
             className={"justify-content-center align-content-center"}
           >
             <Col xs={12} lg={6}>
-              <Form>
-                <Form.Group
-                  className="mb-4"
-                  controlId="exampleForm.ControlInput1"
-                >
+              <Form onSubmit={submitHandler}>
+                <Form.Group className="mb-4">
                   <Form.Label>
                     <h2>Name</h2>
                   </Form.Label>
-                  <Form.Control type="text" placeholder="Name" />
+                  <Form.Control
+                    type="text"
+                    id="name"
+                    name="name"
+                    defaultValue=""
+                    required
+                    placeholder="Name"
+                  />
                 </Form.Group>
 
-                <Form.Group
-                  className="mb-4"
-                  controlId="exampleForm.ControlInput1"
-                >
+                <Form.Group className="mb-4">
                   <Form.Label>
                     <h2>Email Address</h2>
                   </Form.Label>
-                  <Form.Control type="email" placeholder="name@example.com" />
+                  <Form.Control
+                    type="email"
+                    id="email"
+                    name="email"
+                    defaultValue=""
+                    required
+                    placeholder="name@example.com"
+                  />
                 </Form.Group>
 
-                <Form.Group
-                  className="mb-4"
-                  controlId="exampleForm.ControlTextarea1"
-                >
+                <Form.Group className="mb-4">
                   <Form.Label>
                     <h2>How can we help?</h2>
                   </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    id="request"
+                    name="request"
+                    defaultValue=""
+                    required
+                  />
                 </Form.Group>
 
                 <Button size="lg" variant="primary" type="submit">
