@@ -8,19 +8,19 @@ There is also information about all classes and coaches.
 
 # Test credentials
 Admin user who can create, edit and delete all information related to coaches, classes and articles:
-username: test@test.com
-password: 111111
+- username: test@test.com
+- password: 111111
 
 Regular user who can create only articles and edit only if he is the owner:
-username: test2@test.com
-password: 111111
+- username: test2@test.com
+- password: 111111
 
 #Tech stack
-ReactJs
-React Router 6
-React Bootstrap
-Firebase
-Formik
-Yup
-Email Validator
-Font Awesome
+- ReactJs
+- React Router 6
+- React Bootstrap
+- Firebase
+- Formik
+- Yup
+- Email Validator
+- Font Awesome
